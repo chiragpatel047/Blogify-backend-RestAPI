@@ -3,10 +3,12 @@ const userRouter = require('./routes/userRouter');
 const app = express();
 
 const mongoose = require('mongoose');
+const blogRouter = require('./routes/BlogRouter');
 
 app.use(express.json());
 
 app.use("/users",userRouter);
+app.use("/blogs",blogRouter);
 
 mongoose.connect("mongodb+srv://chiragpatel4825:chirag1234@cluster0.m1nbh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 .then(()=>{

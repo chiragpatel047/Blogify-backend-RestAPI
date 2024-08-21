@@ -3,10 +3,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const SECRET_KEY = "JWTKEY";
 
-
 const signup = async (req,res)=>{
     const {username,email,password} = req.body;
+
     try {
+        
         const isUserExist = await userModel.findOne({email : email});
 
         if(isUserExist){
@@ -49,13 +50,11 @@ const login = async (req,res)=>{
         const token =  jwt.sign({email : isUserExist.email,id : isUserExist._id},SECRET_KEY);
         res.status(201).json({user : isUserExist,token : token});
 
-
     } catch (error) {
         console.log(error);
         res.status(500).json({message : "Something went wrong"});
     }
     
-
 };
 
 module.exports = {signup,login};
